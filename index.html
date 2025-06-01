@@ -16,6 +16,84 @@
 				width: 50%;
 				height: auto;
 			}
+			.floating-pill {
+				position: fixed;
+				right: 20px;
+				top: 50%;
+				transform: translateY(-50%);
+				background: rgba(255, 255, 255, 0.9);
+				border-radius: 50px;
+				padding: 10px 20px;
+				box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+				z-index: 1000;
+				display: flex;
+				align-items: center;
+				gap: 15px;
+			}
+			.floating-pill .icons {
+				display: flex;
+				gap: 15px;
+				margin: 0;
+				padding: 0;
+			}
+			.floating-pill .icons li {
+				margin: 0;
+			}
+			.floating-pill .about-link {
+				padding: 5px 15px;
+				background: #000;
+				color: #fff;
+				border-radius: 20px;
+				text-decoration: none;
+				font-size: 0.9em;
+				cursor: pointer;
+			}
+			.floating-pill .about-link:hover {
+				background: #333;
+			}
+			#footer {
+				display: none;
+				position: fixed;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+				background: white;
+				padding: 30px;
+				border-radius: 10px;
+				box-shadow: 0 5px 30px rgba(0, 0, 0, 0.15);
+				z-index: 1001;
+				max-width: 800px;
+				width: 90%;
+				max-height: 90vh;
+				overflow-y: auto;
+			}
+			#footer.active {
+				display: block;
+			}
+			.overlay {
+				display: none;
+				position: fixed;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				background: rgba(0, 0, 0, 0.5);
+				z-index: 1000;
+			}
+			.overlay.active {
+				display: block;
+			}
+			.close-button {
+				position: absolute;
+				top: 15px;
+				right: 15px;
+				cursor: pointer;
+				font-size: 24px;
+				color: #666;
+			}
+			.close-button:hover {
+				color: #000;
+			}
 		</style>
 	</head>
 	<body class="is-preload">
@@ -23,20 +101,6 @@
 		<!-- Wrapper -->
 			<div id="wrapper">
 
-				<!-- Header -->
-					<header id="header">
-						<h1>									
-							<ul class="icons">
-								<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
-								<li><a href="#" class="icon brands fa-linkedin-in"><span class="label">LinkedIn</span></a></li>
-							</ul>
-						</h1>
-						<nav>
-							<ul>
-								<li><a href="#footer" class="icon solid fa-info-circle">About</a></li>
-							</ul>
-						</nav>
-					</header>
 
 				<!-- Main -->
 					<div id="main">
@@ -145,34 +209,6 @@
 									<h2>Gareth Volka</h2>
 									<p>Gareth Volka is a London-based architect and fashion designer. His eponymous couture brand explores the intersection of fashion, computation, digital fabrication, materiality, and sustainability, drawing on years of research into topics such as generative algorithms, free-form 3D printing, programmable matter, biomimetic robotics, and biomaterials. His designs often build narratives around nature and sensuality, brought to life through ingenuity and craftsmanship.</p>
 								</section>
-								<section>
-									<ul class="icons">
-										<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
-										<li><a href="#" class="icon brands fa-linkedin-in"><span class="label">LinkedIn</span></a></li>
-									</ul>
-								</section>
-							</div>
-							<div>
-								<section>
-									<h2>Get in touch</h2>
-									<form method="post" action="#">
-										<div class="fields">
-											<div class="field half">
-												<input type="text" name="name" id="name" placeholder="Name" />
-											</div>
-											<div class="field half">
-												<input type="text" name="email" id="email" placeholder="Email" />
-											</div>
-											<div class="field">
-												<textarea name="message" id="message" rows="4" placeholder="Message"></textarea>
-											</div>
-										</div>
-										<ul class="actions">
-											<li><input type="submit" value="Send" class="primary" /></li>
-											<li><input type="reset" value="Reset" /></li>
-										</ul>
-									</form>
-								</section>
 							</div>
 						</div>
 					</footer>
@@ -186,6 +222,26 @@
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
+
+		<!-- Floating Pill Button -->
+		<div class="floating-pill">
+			<ul class="icons">
+				<li><a href="https://www.instagram.com/garethvolka/" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+				<li><a href="https://www.linkedin.com/in/gareth-volka/" class="icon brands fa-linkedin-in"><span class="label">LinkedIn</span></a></li>
+			</ul>
+			<a class="about-link" onclick="toggleAbout()">Gareth Volka</a>
+		</div>
+		<div class="overlay" onclick="toggleAbout()"></div>
+
+		<script>
+			function toggleAbout() {
+				const footer = document.getElementById('footer');
+				const overlay = document.querySelector('.overlay');
+				footer.classList.toggle('active');
+				overlay.classList.toggle('active');
+				document.body.style.overflow = footer.classList.contains('active') ? 'hidden' : '';
+			}
+		</script>
 
 	</body>
 </html>
